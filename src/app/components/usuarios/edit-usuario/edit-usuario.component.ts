@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Params } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario.service';
-import { RolService } from '../../../services/rol.service';
+
 declare var toastr:any
 @Component({
   selector: 'app-edit-usuario',
@@ -13,17 +13,16 @@ export class EditUsuarioComponent {
   public usuario:any={}
   public btn_load=false
   public id=''
-  public roles: Array<any>=[]
   constructor(
     private _route:ActivatedRoute,
     private _usuarioService:UsuarioService,
-    private _rolService: RolService 
+ 
     
   ){}
 
   ngOnInit(){
     this._route.params.subscribe(
-      params=>{
+      (      params: Params)=>{
         this.id=params['id']
         this.init_data()
 
@@ -32,26 +31,12 @@ export class EditUsuarioComponent {
   }
   init_data(){
     this._usuarioService.getUsuario(this.id,this.token).subscribe(
-      response=>{
+      (      response: { data: any; })=>{
         this.usuario=response.data
         console.log(response)
       }
     )
-    this._rolService.getRoles(this.token).subscribe(
-      response=>{
-       
-        if(response.data != undefined){
-          
-          this.roles=response.data
-          console.log(this.roles)
-        }else{
-          toastr.error(response.message)
-        }
-      },
-      error=>{
-        console.log(error)
-      }
-    )
+  
   }
 
   actualizar(){
@@ -65,7 +50,7 @@ export class EditUsuarioComponent {
       toastr.error("el rol es requeridos")
     }else{
       this._usuarioService.updateUsuario(this.id,this.usuario,this.token).subscribe(
-        response=>{
+        (        response: { data: undefined; message: any; })=>{
           console.log(response)
           if(response.data!= undefined){
             toastr.success("Usuario Actualizado")

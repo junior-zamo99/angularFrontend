@@ -13,8 +13,8 @@ export class LoginComponent {
 
 
   public usuario:any={
-    email:'',
-    password:''
+    username:'',
+    pass:''
   }
   token: any;
   
@@ -28,17 +28,17 @@ export class LoginComponent {
   }
 
   login() {
-    if (!this.usuario.email) {
+    if (!this.usuario.username) {
       toastr.error('El campo Registro es requerido');
-    } else if (!this.usuario.password) {
+    } else if (!this.usuario.pass) {
       toastr.error('El campo password es requerido');
     } else {
       console.log(this.usuario);
       this._usuarioServices.login(this.usuario).subscribe(
         response => {
           console.log(response);
-          localStorage.setItem('token', response.jwt);
-          localStorage.setItem('user', JSON.stringify(response.data));
+          localStorage.setItem('token', response.access_token);
+          localStorage.setItem('user', JSON.stringify(response.user));
      
           toastr.success('Inicio de sesión exitoso');
           this._router.navigate(['/dashboard']);

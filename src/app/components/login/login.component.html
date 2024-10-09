@@ -50,14 +50,14 @@
                     <!--begin::Input group--->
                     <div class="fv-row mb-8">
                         <!--begin::Email-->
-                        <input type="email" (keyup.ENTER)="login()" placeholder="Email" name="email" autocomplete="off"  class="form-control form-control-solid" [(ngModel)]="usuario.email"/> 
+                        <input type="string" (keyup.ENTER)="login()" placeholder="Username" name="Username" autocomplete="off"  class="form-control form-control-solid" [(ngModel)]="usuario.username"/> 
                         <!--end::Email-->
                     </div>
 
                     <!--end::Input group--->
                     <div class="fv-row mb-7">    
                         <!--begin::Password-->
-                        <input type="password" (keyup.ENTER)="login()" placeholder="Password" name="password" autocomplete="off"  class="form-control form-control-solid" [(ngModel)]="usuario.password"/>
+                        <input type="password" (keyup.ENTER)="login()" placeholder="Password" name="pass" autocomplete="off"  class="form-control form-control-solid" [(ngModel)]="usuario.pass"/>
                         <!--end::Password-->
                     </div>
                     <!--end::Input group--->

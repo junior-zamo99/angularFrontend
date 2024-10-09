@@ -15,41 +15,39 @@ export class UsuarioService {
     private  _http: HttpClient
   ) {}
 
-  createTenant(data:any):Observable<any>{
-    return this._http.post(this.url+'/createTenant',data)
+  createUsuario(data:any):Observable<any>{
+    
+    
+    return this._http.post(this.url+'/users',data)
+
   }
 
-  createUsuario(data:any,token:any):Observable<any>{
-    let headers= new HttpHeaders({'Content-Type':'application/json','Autorization':token})
-    return this._http.post(this.url+'/createUsuario',data,{headers:headers})
+  getUsuarios(token:any):Observable<any>{
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}` 
+    });
+    return this._http.get(this.url+'/users/',{headers:headers})
   }
 
-  getUsuarios(filtro:any,token:any):Observable<any>{
-    let headers= new HttpHeaders({'Content-Type':'application/json','Autorization':token})
-    return this._http.get(this.url+'/getUsuarios/'+filtro,{headers:headers})
+  getRols(token:any):Observable<any>{
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}` 
+    });
+    return this._http.get(this.url+'/rol/',{headers:headers})
   }
 
   login(data:any):Observable<any>{
     let headers= new HttpHeaders().set('Content-Type','application/json')
-    return this._http.post(this.url+'/login',data,{headers:headers})
+    console.log(this.url+'auth/login')
+    return this._http.post(this.url+'/auth/login',data,{headers:headers})
   }
 
   
-  cambioEstado(id:any,data:any,token:any):Observable<any>{
-    let headers= new HttpHeaders({'Content-Type':'application/json','Autorization':token})
-    return this._http.put(this.url+'/cambioEstado/'+id,data,{headers:headers})
-  }
-
-  getUsuario(id:any,token:any):Observable<any>{
-    let headers= new HttpHeaders({'Content-Type':'application/json','Autorization':token})
-    return this._http.get(this.url+'/getUsuario/'+id,{headers:headers})
-  }
+ 
   
   
-  updateUsuario(id:any,data:any,token:any):Observable<any>{
-    let headers= new HttpHeaders({'Content-Type':'application/json','Autorization':token})
-    return this._http.put(this.url+'/updateUsuario/'+id,data,{headers:headers})
-  }
   EstaAutenticado(){
     try {
       if (typeof localStorage !== 'undefined') {

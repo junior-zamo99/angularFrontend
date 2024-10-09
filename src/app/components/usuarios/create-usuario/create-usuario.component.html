@@ -66,7 +66,7 @@
                       <!--begin::Input group-->
                       <div class="row mb-6">
                         <!--begin::Label-->
-                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nombres y apellidos</label>
+                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nombre</label>
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8">
@@ -75,14 +75,11 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                               <input type="text" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Nombres" 
-                              [(ngModel)]="usuario.nombres"/>
+                              [(ngModel)]="usuario.nombre"/>
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
-                            <div class="col-lg-6 fv-row">
-                              <input type="text" class="form-control form-control-lg form-control-solid" placeholder="Apellidos" 
-                              [(ngModel)]="usuario.apellidos"  />
-                            </div>
+                           
                             <!--end::Col-->
                           </div>
                           <!--end::Row-->
@@ -91,6 +88,27 @@
                       </div>
                       <!--end::Input group-->
                       <!--begin::Input group-->
+                      <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nombre de Usuario</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-8 fv-row">
+                          <!--begin::Row-->
+                          <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                              <input type="text" class="form-control form-control-lg form-control-solid" placeholder="Nombre de Usuario" 
+                              [(ngModel)]="usuario.username"/>
+                            </div>
+                            <!--end::Col-->
+                            
+                          </div>
+                          <!--end::Row-->
+                          
+                        </div>
+                        <!--end::Col-->
+                      </div>
                       <div class="row mb-6">
                         <!--begin::Label-->
                         <label class="col-lg-4 col-form-label required fw-semibold fs-6">Correo electrónico</label>
@@ -112,10 +130,9 @@
                         </div>
                         <!--end::Col-->
                       </div>
-                      <!--end::Input group-->
                       <div class="row mb-6">
                         <!--begin::Label-->
-                        <label class="col-lg-4 required col-form-label fw-semibold fs-6">Rol</label>
+                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Contraseña</label>
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
@@ -123,9 +140,56 @@
                           <div class="row">
                             <!--begin::Col-->
                             <div class="col-lg-12 fv-row">
-                              <select class="form-select mb-2" [(ngModel)]="usuario.rol"  >
+                              <input type="password" class="form-control form-control-lg form-control-solid"  
+                              [(ngModel)]="usuario.password"/>
+                            </div>
+                            <!--end::Col-->
+                            
+                          </div>
+                          <!--end::Row-->
+                          
+                        </div>
+                        <!--end::Col-->
+                      </div>
+                      <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Fecha de Nacimiento</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-8 fv-row">
+                          <!--begin::Row-->
+                          <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                              <input type="date" class="form-control form-control-lg form-control-solid"  
+                              [(ngModel)]="usuario.fechaNacimiento"/>
+                            </div>
+                            <!--end::Col-->
+                            
+                          </div>
+                          <!--end::Row-->
+                          
+                        </div>
+                        <!--end::Col-->
+                      </div>
+                      
+                      
+                      <!--end::Input group-->
+                      <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-4 required col-form-label fw-semibold fs-6">Genero</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-8 fv-row">
+                          <!--begin::Row-->
+                          <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                              <select class="form-select mb-2" [(ngModel)]="usuario.genero"  >
                                 <option selected disabled value="">Seleccionar</option>
-                                <option value="{{item._id}}" *ngFor="let item of roles">{{item.nombre}}</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                                <option value="U">Indefinido</option>
                                
                               </select>
                             </div>
@@ -137,7 +201,31 @@
                         </div>
                         <!--end::Col-->
                       </div>
-                      
+                      <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-4 required col-form-label fw-semibold fs-6">Rol</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-8 fv-row">
+                          <!--begin::Row-->
+                          <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                              <select class="form-select mb-2" [(ngModel)]="usuario.id_Rol"  >
+                                <option selected disabled value="">Seleccionar</option>
+                                <option value="{{item.id}}" *ngFor="let item of roles">{{item.cargo}}</option>
+                               
+                               
+                              </select>
+                            </div>
+                            <!--end::Col-->
+                            
+                          </div>
+                          <!--end::Row-->
+                          
+                        </div>
+                        <!--end::Col-->
+                      </div>
                       
                     </div>
                     <div class="card-footer">

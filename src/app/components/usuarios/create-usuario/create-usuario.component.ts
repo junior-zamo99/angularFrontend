@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario.service';
 import { Router } from '@angular/router';
-import { RolService } from '../../../services/rol.service';
+
 
 
 declare var toastr:any
@@ -15,54 +15,55 @@ export class CreateUsuarioComponent {
 
   public token=localStorage.getItem('token')
   public btn_load=false
-  public roles: Array<any>=[]
+  public roles:any=[]
   constructor(
     private _usuarioService: UsuarioService,
     private _router:Router,
-    private _rolService: RolService 
   ){}
 
   ngOnInit(){
-    this.initData()
-  }
 
-
-  initData(){
-    this._rolService.getRoles(this.token).subscribe(
+    this._usuarioService.getRols(this.token).subscribe(
       response=>{
-       
-        if(response.data != undefined){
-          
-          this.roles=response.data
-          console.log(this.roles)
-        }else{
-          toastr.error(response.message)
-        }
+        console.log(response)
+        this.roles=response
       },
       error=>{
         console.log(error)
-      }
-    )
+      })
+
   }
 
+
+ 
 
 
   registrar(){
    
-    if(!this.usuario.nombres){
+    this.usuario.contraseña=this.usuario.password
+    console.log(this.usuario)
+
+    if(!this.usuario.nombre){
       toastr.error("los nombre son requeridos")
-    }else  if(!this.usuario.apellidos){
-      toastr.error("los apellidos son requeridos")
+    }else if(!this.usuario.username){
+      toastr.error("el nombre de usuario es requeridos")
     } else  if(!this.usuario.email){
       toastr.error("el correo electronico es requeridos")
-    }else  if(!this.usuario.rol){
+    }else  if(!this.usuario.id_Rol){
       toastr.error("el rol es requeridos")
-    }else{
+    }
+    else if(!this.usuario.contraseña){
+      toastr.error("la contraseña es requerida")
+    }
+    else if(!this.usuario.fechaNacimiento){
+      toastr.error("la fecha de nacimiento es requerida")
+    }
+    else{
       console.log(this.usuario)
       this.btn_load=true
-      this._usuarioService.createUsuario(this.usuario,this.token).subscribe(
+      this._usuarioService.createUsuario(this.usuario).subscribe(
         response=>{
-          if(response.data != undefined){
+          if(response != undefined){
             console.log(response)
             this.btn_load=false
             this._router.navigate(['/colaborador']) 

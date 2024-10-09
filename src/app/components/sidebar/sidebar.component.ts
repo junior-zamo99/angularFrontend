@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RolService } from '../../services/rol.service';
 declare var KTApp:any;
 declare var KTLayoutAside:any;
 declare var KTUtil:any;
@@ -20,7 +19,7 @@ export class SidebarComponent {
   public rol:any;
   public funcionalidades:any=[]
   constructor(
-    private rolservice: RolService,
+  
   ) { }
 
   ngOnInit(): void {
@@ -35,17 +34,9 @@ export class SidebarComponent {
     KTScrolltop.init();
 
     KTMenu.init();
-    this.rolId=this.user.rol;
-    this.rolservice.getRol(this.rolId,this.token).subscribe(
-      response => {
-        this.rol = response;
-        this.funcionalidades=this.rol.funcionalidades
-      }
-    );
+   
     
   }
 
-  tienePermiso(permiso: string): boolean {
-    return this.funcionalidades.some((funcionalidad: any) => funcionalidad.nombre === permiso);
-  }
+  
 }
